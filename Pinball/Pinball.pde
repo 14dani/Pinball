@@ -23,10 +23,10 @@ void setup(){
   
   paredes = new ArrayList<Boundary>();
   
-  paredes.add(new Boundary(width/2,height-5,width,10));
-  paredes.add(new Boundary(width/2,5,width,10));
-  paredes.add(new Boundary(width-5,height/2,10,height));
-  paredes.add(new Boundary(5,height/2,10,height));
+  paredes.add(new Boundary(width/2,height-5,width,10)); //pared de arriba
+  paredes.add(new Boundary(width/2,5,width,10)); //pared de abajo
+  paredes.add(new Boundary(width-5,height/2,10,height));//pared de la izquierda
+  paredes.add(new Boundary(5,height/2,10,height));//pared de la derecha
   
   obstaculos = new ArrayList<Boundary>();
   obstaculos.add(new Boundary(width/2,height/2,10));
@@ -38,9 +38,9 @@ void setup(){
 void draw(){
   
   background(200);
-  box2d.step();
+  box2d.step(); 
   
-  for (Boundary pared : paredes) {
+  for (Boundary pared : paredes) {  //busca las paredes en el arraylist
     pared.display();
   }
   

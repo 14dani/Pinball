@@ -7,7 +7,9 @@ class Boundary {
   float r;
   
   Body b;
-
+  
+  
+  //Constructor para elementos cuadrados (paredes)
   Boundary(float x_,float y_, float w_, float h_) {
     x = x_;
     y = y_;
@@ -32,6 +34,7 @@ class Boundary {
     b.createFixture(sd,1);
   }
   
+  //Constructor para elementos circulares (obstaculos)
   Boundary(float x_,float y_, float r_) {
     x = x_;
     y = y_;
