@@ -15,6 +15,9 @@ ArrayList<Boundary> obstaculos;
 
 Ball pelota;
 
+//forma semicircular
+Surface spfc;
+
 void setup(){
   
   size(500, 700);
@@ -23,15 +26,21 @@ void setup(){
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
   
+  //Superficie
+  spfc = new Surface();
+  
   paredes = new ArrayList<Boundary>();
   
-  paredes.add(new Boundary(width/2,height-5,width,10)); //pared de arriba
-  paredes.add(new Boundary(width/2,5,width,10)); //pared de abajo
-  paredes.add(new Boundary(width-5,height/2,10,height));//pared de la izquierda
-  paredes.add(new Boundary(5,height/2,10,height));//pared de la derecha
+  //paredes.add(new Boundary(width/2,height-5,width,10)); //pared de arriba
+  paredes.add(new Boundary(width/2,5,width,5)); //pared de abajo
+  paredes.add(new Boundary(width-5,height/2,5,height));//pared de la izquierda
+  paredes.add(new Boundary(5,height/2,5,height));//pared de la derecha
   
   obstaculos = new ArrayList<Boundary>();
   obstaculos.add(new Boundary(width/2,height/2,10));
+  obstaculos.add(new Boundary(width/2+200,height/2-100,15));
+  obstaculos.add(new Boundary(width/2-200,height/2-100,15));
+  obstaculos.add(new Boundary(width/2,height/2-200,20));
   
   
   pelota = new Ball(width/2-10, 50, 10);
@@ -54,6 +63,7 @@ void draw(){
   }
   
   pelota.display();
+  spfc.display();
 
 
 }
