@@ -21,7 +21,7 @@ ArrayList<Boundary> obstaculos;
 Ball pelota;
 
 //forma semicircular
-Surface spfc;
+Surface arco;
 
 
 //Escenario
@@ -41,22 +41,25 @@ void setup(){
  escPortada = new Escenario(loadImage("Portada_Prueba.png"));
  escJuego = new Escenario(loadImage("Juego_Prueba.png"));
   
-  //Superficie
-  spfc = new Surface();
+  //SuperficieOrgánica
+  arco = new Surface(width/2, height/2-95, width/2, 180, 360);
   
   //Paredes
   paredes = new ArrayList<Boundary>();
- //paredes.add(new Boundary(width/2,height-5,width,10)); //pared de arriba
-  paredes.add(new Boundary(width/2,5,width,5)); //pared de abajo
-  paredes.add(new Boundary(width-5,height/2,5,height));//pared de la izquierda
-  paredes.add(new Boundary(5,height/2,5,height));//pared de la derecha
+  paredes.add(new Boundary(width/2,height,width,4)); //pared de abajo
+  //paredes.add(new Boundary(width/2,5,width,5)); //pared de arriba
+  
+  paredes.add(new Boundary(width,height/2+220,4,height));//pared de la izquierda
+  paredes.add(new Boundary(0,height/2+220,4,height));//pared de la derecha
   
   //Obstaculos
   obstaculos = new ArrayList<Boundary>();
-  obstaculos.add(new Boundary(width/2,height/2,10));
-  obstaculos.add(new Boundary(width/2+200,height/2-100,15));
-  obstaculos.add(new Boundary(width/2-200,height/2-100,15));
-  obstaculos.add(new Boundary(width/2,height/2-200,20));
+  obstaculos.add(new Boundary(width/2,height/2,10));//Obs de abajo
+  obstaculos.add(new Boundary(width/2+200,height/2-80,20));//dos obs de arriba
+  obstaculos.add(new Boundary(width/2-200,height/2-80,20));
+  obstaculos.add(new Boundary(width/2,height/2-200,25));//obs de arriba
+  obstaculos.add(new Boundary(width/2+100,height/2+200,15));//dos obs de abajo
+  obstaculos.add(new Boundary(width/2-100,height/2+200,15));
   
   //Cuerpo dinámico
   pelota = new Ball(width/2-10, 50, 10);
@@ -91,6 +94,7 @@ void escenarioPortada(){
 void escenarioJuego(){
   escJuego.display();
   
+  arco.display();
   for (Boundary pared : paredes) {  //busca las paredes en el arraylist
     pared.display();
   }
@@ -99,7 +103,7 @@ void escenarioJuego(){
   }
   
   pelota.display();
-  spfc.display();
+  
 
 }
 

@@ -2,57 +2,48 @@
 class Surface
 {
 
- ArrayList<Vec2> points;
+ ArrayList<Vec2> superficie;
 
 
-    Surface()
+    Surface(float _x,float _y, float _r, int _beginAngle, int _endAngle)
     {
-    points = new ArrayList<Vec2>();
+    superficie = new ArrayList<Vec2>();
     
-    float theta = 0;
-    float count = 5;
+    ChainShape chain = new ChainShape();
     
-    //points.add(new Vec2((width/2) + 50, height+20));
-    //points.add(new Vec2(width - 50, height - 100));
-    //points.add(new Vec2(width-50, height - 500));
-    //points.add(new Vec2(width - 50, height));
-    //points.add(new Vec2(width-2,height));
-    //points.add(new Vec2(width-2, height - 600));
-    
-    //creates the arch
-    while (radians(theta) > (-PI))
-    {
-      points.add(new Vec2(width/2+(width/2)*cos(radians(theta)),200+200*sin(radians(theta))));
-      theta -= count;
+    for (float x = _beginAngle; x < _endAngle; x += 5) {
+      float pX = _x + cos(radians(x))*_r;
+      float pY = _y + sin(radians(x))*_r;
+      superficie.add(new Vec2(pX,pY));
     }
     
-    points.add(new Vec2(0, height));
-    points.add(new Vec2(width/2 - 100, height));
-    points.add(new Vec2(0, height - 100));
-    
-    ChainShape c = new ChainShape();
-    
-    Vec2[] v = new Vec2[points.size()];
-    for(int i=0;i < v.length; ++i)
-    {
-      v[i] = box2d.coordPixelsToWorld(points.get(i));
+    //Se crean vertice
+    Vec2[] vertices = new Vec2[superficie.size()];
+    for (int i = 0; i < vertices.length; i++) {
+      Vec2 edge = box2d.coordPixelsToWorld(superficie.get(i));
+      vertices[i] = edge;
     }
     
-    c.createChain(v,v.length);
-    
+    //Se crea la cadena
+    chain.createChain(vertices,vertices.length);
+
     BodyDef bd = new BodyDef();
-    Body body = box2d.world.createBody(bd);
-    body.createFixture(c, 1);
+    bd.position.set(0.0f,0.0f);
+    Body body = box2d.createBody(bd);
+    body.createFixture(chain,1);
+    body.setUserData(this);
   }
+  
   
   void display() {
     strokeWeight(2);
     stroke(0);
     noFill();
     beginShape();
-    for (Vec2 v: points) {
+    for (Vec2 v: superficie) {
       vertex(v.x,v.y);
     }
     endShape();
   }
+  
 }
