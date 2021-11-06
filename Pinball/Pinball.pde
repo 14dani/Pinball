@@ -20,7 +20,7 @@ ArrayList<Boundary> obstaculos;
 
 Ball pelota;
 
-//forma semicircular
+//forma semicircular de arriba
 Surface arco;
 
 
