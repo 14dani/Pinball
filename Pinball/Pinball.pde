@@ -57,3 +57,12 @@ void draw(){
 
 
 }
+
+
+void escenarioPortada(){
+
+}
+
+void escenarioJuego(){
+
+}
