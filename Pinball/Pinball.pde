@@ -13,6 +13,8 @@ Box2DProcessing box2d;
 ArrayList<Boundary> paredes;
 ArrayList<Boundary> obstaculos;
 
+Ball pelota;
+
 void setup(){
   
   size(500, 700);
@@ -30,6 +32,9 @@ void setup(){
   
   obstaculos = new ArrayList<Boundary>();
   obstaculos.add(new Boundary(width/2,height/2,10));
+  
+  
+  pelota = new Ball(width/2-10, 50, 10);
 
 
 }
@@ -47,6 +52,8 @@ void draw(){
   for (Boundary obs : obstaculos) {
     obs.display();
   }
+  
+  pelota.display();
 
 
 }
