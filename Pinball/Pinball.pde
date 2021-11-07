@@ -1,5 +1,9 @@
 //hello world
+import ddf.minim.*;
 
+Minim minim;
+AudioPlayer playI;
+AudioPlayer playJ;
 import shiffman.box2d.*;
 
 import org.jbox2d.collision.shapes.*;
@@ -34,12 +38,16 @@ void setup(){
 
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
+  minim = new Minim(this);
+  
+  playI = minim.loadFile("Arab Ambient (Full).mp3");
+  playJ = minim.loadFile("War.mp3");
   
   escenario = 1;
   
  //Escenario
- escPortada = new Escenario(loadImage("Portada_Prueba.png"));
- escJuego = new Escenario(loadImage("Juego_Prueba.png"));
+ escPortada = new Escenario(loadImage("Foto-portada.png"));
+ escJuego = new Escenario(loadImage("Foto-Juego.png"));
   
   //SuperficieOrgánica
   arco = new Surface(width/2, height/2-95, width/2, 180, 360);
@@ -72,9 +80,13 @@ void draw(){
   
   if(escenario == 1){
     escenarioPortada();
+    playJ.play();
   }
   else{
     escenarioJuego();
+    //playJ.restart();
+    playJ.play();
+    //playJ.loop();
   }
   
   box2d.step(); 
