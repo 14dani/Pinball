@@ -5,8 +5,8 @@ class Surface
  ArrayList<Vec2> superficie;
 
 
-    Surface(float _x,float _y, float _r, int _beginAngle, int _endAngle)
-    {
+    //constructor 
+    Surface(float _x,float _y, float _r, int _beginAngle, int _endAngle){
     superficie = new ArrayList<Vec2>();
     
     ChainShape chain = new ChainShape();

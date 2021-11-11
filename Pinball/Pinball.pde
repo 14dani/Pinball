@@ -4,12 +4,15 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer playI;
 AudioPlayer playJ;
-import shiffman.box2d.*;
 
+import shiffman.box2d.*;
+import org.jbox2d.common.*;
+import org.jbox2d.dynamics.joints.*;
 import org.jbox2d.collision.shapes.*;
+import org.jbox2d.collision.shapes.Shape;
 import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
-import org.jbox2d.dynamics.joints.*;
+import org.jbox2d.dynamics.contacts.*;
 
 // A reference to our box2d world
 Box2DProcessing box2d;
@@ -31,6 +34,9 @@ Surface arco;
 //Escenario
 int escenario;
 
+//Puntos
+int puntos = 0;
+
 void setup(){
   
   size(500, 700);
@@ -39,6 +45,7 @@ void setup(){
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
   minim = new Minim(this);
+  box2d.listenForCollisions(); //monitoreo de colisiones
   
   playI = minim.loadFile("Arab Ambient (Full).mp3");
   playJ = minim.loadFile("War.mp3");
@@ -62,6 +69,11 @@ void setup(){
   
   //Obstaculos
   obstaculos = new ArrayList<Boundary>();
+  Boundary ob1 = new Boundary(width/2,height/2,10);
+  ob1.caracteristicas("obstaculo", 100);
+  obstaculos.add(ob1);
+  //Se agrega lo necesario
+  
   obstaculos.add(new Boundary(width/2,height/2,10));//Obs de abajo
   obstaculos.add(new Boundary(width/2+200,height/2-80,20));//dos obs de arriba
   obstaculos.add(new Boundary(width/2-200,height/2-80,20));
@@ -115,6 +127,36 @@ void escenarioJuego(){
   }
   
   pelota.display();
+  
+  
+  //Metodos reciben la información cuando se hace un contacto
+  // Collision event functions!
+void beginContact(Contact cp) {
+  // Get both fixtures
+  Fixture f1 = cp.getFixtureA();
+  Fixture f2 = cp.getFixtureB();
+  // Get both bodies
+  Body b1 = f1.getBody();
+  Body b2 = f2.getBody();
+
+  // Get our objects that reference these bodies
+  Object o1 = b1.getUserData();
+  Object o2 = b2.getUserData();
+
+  if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
+    Boundary tmp = (Boundary) o2;
+    
+  }
+  
+  if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
+    
+  }
+
+}
+
+// Objects stop touching each other 
+void endContact(Contact cp) {
+}
   
 
 }

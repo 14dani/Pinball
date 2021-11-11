@@ -8,6 +8,9 @@ class Boundary {
   
   Body b;
   
+  String id = "";
+  int valor = 0;
+  
   
   //Constructor para elementos cuadrados (paredes)
   Boundary(float x_,float y_, float w_, float h_) {
@@ -32,6 +35,7 @@ class Boundary {
     
     // Attached the shape to the body using a Fixture
     b.createFixture(sd,1);
+    b.setUserData(this);
   }
   
   //Constructor para elementos circulares (obstaculos)
@@ -51,7 +55,25 @@ class Boundary {
     b = box2d.createBody(bd);
     
     b.createFixture(cs,1);
+    b.setUserData(this);
   }
+  
+  
+  void caracteristicas(String _id, int _valor){
+    id = _id;
+    valor = _valor;
+  }
+  
+  
+  String getId(){
+    return id;
+  }
+  
+  
+  int getValor(){
+    return valor;
+  }
+  
 
   // Draw the boundary, if it were at an angle we'd have to do something fancier
   void display() {

@@ -10,6 +10,8 @@ class Ball{
     r = r_;
     
     makeBody(new Vec2(x,y),r);
+    body.setUserData(this); //nombre de clase apellido Ball
+    
   }
   
   void killBody(){
