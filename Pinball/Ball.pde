@@ -43,6 +43,8 @@ class Ball{
     rotate(a);
     circle(0,0,r*2);
     popMatrix();
+    
+    
   }
   
   
