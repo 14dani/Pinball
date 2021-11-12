@@ -26,7 +26,7 @@ ArrayList<Boundary> paredes;
 ArrayList<Boundary> obstaculos;
 ArrayList<Ball> pelotas;
 
-Ball pelota;
+
 
 //Superficies organicas
 Surface arco; //Arco superior pantalla
@@ -163,11 +163,10 @@ void setup(){
   ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
-  //Cuerpo dinámico
+  //Cuerpos dinámicos
   pelotas = new ArrayList<Ball>();
   
-  pelota = new Ball(width-15, 389, 10);
-  pelotas.add(pelota);  
+   
   
   
   //Motor
@@ -217,13 +216,10 @@ void escenarioJuego(){
   
   for (Ball plt : pelotas) { //busca los obstaculos en el arraylist
     plt.display();
+    
   }
   
-  //for(int x = 0; x < 6; x++){
-  //  Ball pelota = pelotas.get(x);
-  //  pelota.display();
-    
-  //}
+  
   
   //pelota.display();
   text("Puntaje: "+puntos, 100, 20);
@@ -296,11 +292,13 @@ void keyPressed(){
 
 void keyReleased(){
   if(key == ' '){
-    if(pelotas.size()<6){
+    if(pelotas.size()<5){
       keyUp = millis();
       long difTiempo = keyUp - keyDown;
       float potencia = map(constrain(difTiempo, 0, 7000), 0, 7000, 50, 150);
+      Ball pelota = new Ball(width-15, 389, 10); 
       pelota.potenciaDisparo(potencia);
+      pelotas.add(pelota);
     }
     //Ball nuevaPelota = new Ball(width-15, 389, 10);
     //nuevaPelota.potenciaDisparo(potencia);
