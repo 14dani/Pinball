@@ -164,7 +164,11 @@ void setup(){
   obstaculos.add(ob10);
   
   //Cuerpo dinámico
+  pelotas = new ArrayList<Ball>();
+  
   pelota = new Ball(width-15, 389, 10);
+  pelotas.add(pelota);  
+  
   
   //Motor
   motor1 = new Motor(150, 330);
@@ -211,13 +215,17 @@ void escenarioJuego(){
     obs.display();
   }
   
+  for (Ball plt : pelotas) { //busca los obstaculos en el arraylist
+    plt.display();
+  }
+  
   //for(int x = 0; x < 6; x++){
   //  Ball pelota = pelotas.get(x);
   //  pelota.display();
     
   //}
   
-  pelota.display();
+  //pelota.display();
   text("Puntaje: "+puntos, 100, 20);
   motor1.display();
   motor2.display();
@@ -288,10 +296,12 @@ void keyPressed(){
 
 void keyReleased(){
   if(key == ' '){
-    keyUp = millis();
-    long difTiempo = keyUp - keyDown;
-    float potencia = map(constrain(difTiempo, 0, 7000), 0, 7000, 50, 150);
-    pelota.potenciaDisparo(potencia);
+    if(pelotas.size()<6){
+      keyUp = millis();
+      long difTiempo = keyUp - keyDown;
+      float potencia = map(constrain(difTiempo, 0, 7000), 0, 7000, 50, 150);
+      pelota.potenciaDisparo(potencia);
+    }
     //Ball nuevaPelota = new Ball(width-15, 389, 10);
     //nuevaPelota.potenciaDisparo(potencia);
     //pelotas.add(nuevaPelota);
