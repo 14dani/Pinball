@@ -47,6 +47,10 @@ long keyDown, keyUp; //Momento en que se presiona la tecla, momento en que se su
 boolean disparando;
 
 
+//Motor
+Motor motor1, motor2;
+
+
 void setup(){
   
   size(500, 700);
@@ -76,10 +80,10 @@ void setup(){
   puntos.add(new Vec2(470, 260));
   salida = new Surface(puntos);
   
-  ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
-  puntosP.add(new Vec2(width/2, 0));
-  puntosP.add(new Vec2(width/2, 72));
-  pared = new Surface(puntosP);
+  //ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
+  //puntosP.add(new Vec2(width/2, 0));
+  //puntosP.add(new Vec2(width/2, 72));
+  //pared = new Surface(puntosP);
   
   
   //Paredes Inferiores Flotantes
@@ -161,6 +165,10 @@ void setup(){
   
   //Cuerpo dinámico
   pelota = new Ball(width-15, 389, 10);
+  
+  //Motor
+  motor1 = new Motor(150, 330);
+  motor2 = new Motor(width-150, 530);
 
 
 }
@@ -211,6 +219,8 @@ void escenarioJuego(){
   
   pelota.display();
   text("Puntaje: "+puntos, 100, 20);
+  motor1.display();
+  motor2.display();
 
 }
 
