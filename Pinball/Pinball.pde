@@ -69,7 +69,7 @@ void setup(){
   
   //Obstaculos
   obstaculos = new ArrayList<Boundary>();
-  Boundary ob1 = new Boundary(width/2,height/2,10);
+  Boundary ob1 = new Boundary(width/2,height/2-200,25); //Obstaculo de arriba
   ob1.caracteristicas("obstaculo", 100);
   obstaculos.add(ob1);
   //Se agrega lo necesario
