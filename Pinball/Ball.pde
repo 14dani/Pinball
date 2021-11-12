@@ -14,6 +14,14 @@ class Ball{
     
   }
   
+  
+  void potenciaDisparo(float potencia){
+    //give it some initial random velocity
+    body.setLinearVelocity(new Vec2(0,potencia));
+    body.setAngularVelocity(random(-10,10));
+  }
+  
+  
   void killBody(){
     box2d.destroyBody(body);
   }
@@ -69,10 +77,10 @@ class Ball{
     fd.restitution = 0.5;
     
     body.createFixture(fd);
+    body.isBullet();
     
-    //give it some initial random velocity
-    body.setLinearVelocity(new Vec2(random(-5,5),random(2,5)));
-    body.setAngularVelocity(random(-5,5));
+    //body.setLinearVelocity(new Vec2(0,-80));
+    //body.setAngularVelocity(random(-10,10));
     
   }
 }
