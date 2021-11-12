@@ -111,7 +111,6 @@ void draw(){
 
 void escenarioPortada(){
   escPortada.display();
-  
 }
 
 
@@ -127,10 +126,11 @@ void escenarioJuego(){
   }
   
   pelota.display();
-  
-  
-  //Metodos reciben la información cuando se hace un contacto
-  // Collision event functions!
+  text("Puntaje: "+puntos, 100, 20);
+
+}
+
+ //Metodos reciben la información cuando se hace un contacto
 void beginContact(Contact cp) {
   // Get both fixtures
   Fixture f1 = cp.getFixtureA();
@@ -144,22 +144,34 @@ void beginContact(Contact cp) {
   Object o2 = b2.getUserData();
 
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
-    Boundary tmp = (Boundary) o2;
-    
+    Boundary tmpOb = (Boundary) o2;
+    if (tmpOb.getId().equals("obstaculo")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
+      ganarPuntos(tmpOb.getValor());
+    }
   }
   
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
-    
+    Boundary tmpOb = (Boundary) o1;
+    if (tmpOb.getId().equals("obstaculo")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
+      ganarPuntos(tmpOb.getValor());
+    }
   }
 
 }
 
-// Objects stop touching each other 
+// Objects stop touching each other
 void endContact(Contact cp) {
 }
-  
 
+
+void ganarPuntos(int pnt){
+  puntos+=pnt;
 }
+
 
 void keyPressed(){
   if(key == 's' || key == 'S'){
