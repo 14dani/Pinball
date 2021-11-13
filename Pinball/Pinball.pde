@@ -81,6 +81,9 @@ void setup(){
   
   
   escenario = 1;
+  playJ.play();
+  playJ.loop();
+  
   
   //Escenario
   escPortada = new Escenario(loadImage("Foto-portada.png"));
@@ -281,25 +284,25 @@ void beginContact(Contact cp) {
       Punch2.trigger(); 
     }
   }
-  //if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
-  //  Boundary tmpOb = (Boundary) o2;
-  //  if (tmpOb.getId().equals("obstaculoE")){
-  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
-  //    //tmpBall.ganarPuntos(tmpOb.getValor());
-  //    ganarPuntos(tmpOb.getValor());
-  //    RisaE.trigger();      
-  //  }
-  //}
+  if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
+    Boundary tmpOb = (Boundary) o2;
+    if (tmpOb.getId().equals("obstaculoE")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
+      ganarPuntos(tmpOb.getValor());
+      RisaE.trigger();      
+    }
+  }
   
-  //if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
-  //  Boundary tmpOb = (Boundary) o1;
-  //  if (tmpOb.getId().equals("obstaculoE")){
-  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
-  //    //tmpBall.ganarPuntos(tmpOb.getValor());
-  //    ganarPuntos(tmpOb.getValor());
-  //    RisaE.trigger();
-  //  }
-  //}
+  if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
+    Boundary tmpOb = (Boundary) o1;
+    if (tmpOb.getId().equals("obstaculoE")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
+      ganarPuntos(tmpOb.getValor());
+      RisaE.trigger();
+    }
+  }
 
 }
 
