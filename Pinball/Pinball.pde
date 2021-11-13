@@ -4,6 +4,13 @@ import ddf.minim.*;
 Minim minim;
 AudioPlayer playI;
 AudioPlayer playJ;
+AudioSample RisaE;
+AudioSample GrapHook;
+AudioSample Punch1;
+AudioSample Punch2;
+AudioSample Punch3;
+AudioSample Punch4;
+AudioSample Punch5;
 
 import shiffman.box2d.*;
 import org.jbox2d.common.*;
@@ -41,6 +48,7 @@ int escenario;
 
 //Puntos
 int puntos = 0;
+float Punch;
 
 //Variables para disparo
 long keyDown, keyUp; //Momento en que se presiona la tecla, momento en que se suelta
@@ -63,8 +71,16 @@ void setup(){
   
   playI = minim.loadFile("Arab Ambient (Full).mp3");
   playJ = minim.loadFile("War.mp3");
+  RisaE = minim.loadSample("Risa-Joker-especial.wav");
+  GrapHook = minim.loadSample("GrapHook.wav");
+  Punch1 = minim.loadSample("Punch 01.mp3");
+  Punch2 = minim.loadSample("Punch 02.mp3");
+  Punch3 = minim.loadSample("Punch 03.mp3");
+  Punch4 = minim.loadSample("Punch 04.mp3");
+  Punch5 = minim.loadSample("Punch 05.mp3");
   
-  escenario = 2;
+  
+  escenario = 1;
   
   //Escenario
   escPortada = new Escenario(loadImage("Foto-portada.png"));
@@ -126,7 +142,7 @@ void setup(){
   
   //Corona
   Boundary ob3 = new Boundary(24,166,5); //Obstaculo de arriba
-  ob3.caracteristicas("obstaculo", 50);
+  ob3.caracteristicas("obstaculoE", 50);
   obstaculos.add(ob3);
   
   
@@ -163,6 +179,7 @@ void setup(){
   ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
+  
   //Cuerpos dinámicos
   pelotas = new ArrayList<Ball>();
   
@@ -181,7 +198,9 @@ void draw(){
   
   if(escenario == 1){
     escenarioPortada();
+    playJ.loop();
     playJ.play();
+    
   }
   else{
     escenarioJuego();
@@ -247,6 +266,8 @@ void beginContact(Contact cp) {
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
+      Punch2.trigger();
+      
     }
   }
   
@@ -256,8 +277,29 @@ void beginContact(Contact cp) {
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
+      //RisaE.trigger();
+      Punch2.trigger(); 
     }
   }
+  //if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
+  //  Boundary tmpOb = (Boundary) o2;
+  //  if (tmpOb.getId().equals("obstaculoE")){
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    RisaE.trigger();      
+  //  }
+  //}
+  
+  //if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
+  //  Boundary tmpOb = (Boundary) o1;
+  //  if (tmpOb.getId().equals("obstaculoE")){
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    RisaE.trigger();
+  //  }
+  //}
 
 }
 
@@ -284,6 +326,7 @@ void keyPressed(){
       keyDown = millis();
       disparando = true;
       
+      
     }
   }
   
@@ -299,6 +342,7 @@ void keyReleased(){
       Ball pelota = new Ball(width-15, 389, 10); 
       pelota.potenciaDisparo(potencia);
       pelotas.add(pelota);
+      GrapHook.trigger();
     }
     //Ball nuevaPelota = new Ball(width-15, 389, 10);
     //nuevaPelota.potenciaDisparo(potencia);
