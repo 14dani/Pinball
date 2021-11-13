@@ -5,6 +5,8 @@ class Motor {
   RevoluteJoint joint;
   Box box1;
   Box box2;
+  String id = "";
+  int valor = 0;
 
   Motor(float x, float y) {
 
@@ -39,8 +41,13 @@ class Motor {
   boolean motorOn() {
     return joint.isMotorEnabled();
   }
-
-
+  void caracteristicas(String _id, int _valor){
+    id = _id;
+    valor = _valor;
+  }
+  String getId(){
+    return id;
+  }
   void display() {
     box2.display();
     box1.display();

@@ -191,7 +191,10 @@ void setup(){
   
   //Motor
   motor1 = new Motor(150, 330);
+  motor1.caracteristicas("obstaculo2", 0);
+  
   motor2 = new Motor(width-150, 530);
+  motor2.caracteristicas("obstaculo3", 0);
 
 
 }
@@ -258,11 +261,14 @@ void beginContact(Contact cp) {
   // Get both bodies
   Body b1 = f1.getBody();
   Body b2 = f2.getBody();
+  Body b3 = f2.getBody();
 
   // Get our objects that reference these bodies
   Object o1 = b1.getUserData();
   Object o2 = b2.getUserData();
+  Object m2 = b3.getUserData();
 
+// if de obstaculos normales
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
     if (tmpOb.getId().equals("obstaculo")){
@@ -284,6 +290,8 @@ void beginContact(Contact cp) {
       Punch2.trigger(); 
     }
   }
+  
+  // if de obstaculo especial = risa joker
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
     if (tmpOb.getId().equals("obstaculoE")){
@@ -300,6 +308,25 @@ void beginContact(Contact cp) {
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
+      RisaE.trigger();
+    }
+  }
+  
+  // if de obstaculo especial = risa joker
+  if (o1.getClass() == Ball.class && m2.getClass() == Motor.class) {
+    Motor tmpOb = (Motor) o2;
+    if (tmpOb.getId().equals("obstaculoE")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
+      RisaE.trigger();      
+    }
+  }
+  
+  if (m2.getClass() == Motor.class && o2.getClass() == Ball.class) {
+    Motor tmpOb = (Motor) o1;
+    if (tmpOb.getId().equals("obstaculoE")){
+      //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+      //tmpBall.ganarPuntos(tmpOb.getValor());
       RisaE.trigger();
     }
   }
