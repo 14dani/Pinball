@@ -194,7 +194,7 @@ void setup(){
   motor1.caracteristicas("obstaculo2", 0);
   
   motor2 = new Motor(width-150, 530);
-  motor2.caracteristicas("obstaculo3", 0);
+  motor2.caracteristicas("obstaculo2", 0);
 
 
 }
@@ -315,19 +315,19 @@ void beginContact(Contact cp) {
   // if de obstaculo especial = risa joker
   if (o1.getClass() == Ball.class && m2.getClass() == Motor.class) {
     Motor tmpOb = (Motor) o2;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("obstaculo2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
-      RisaE.trigger();      
+      Punch2.trigger();      
     }
   }
   
   if (m2.getClass() == Motor.class && o2.getClass() == Ball.class) {
     Motor tmpOb = (Motor) o1;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("obstaculo2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
-      RisaE.trigger();
+      Punch2.trigger();
     }
   }
 

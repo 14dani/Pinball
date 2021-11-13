@@ -33,6 +33,7 @@ class Box {
     fd.restitution = 0.5;
 
     body.createFixture(fd);
+    body.setUserData(this);
 
     // Give it some initial random velocity
     body.setLinearVelocity(new Vec2(random(-5,5),random(2,5)));
