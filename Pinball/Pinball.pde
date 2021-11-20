@@ -36,9 +36,9 @@ ArrayList<Ball> pelotas;
 
 
 //Superficies organicas
-Surface arco; //Arco superior pantalla
+Surface arco, arco1; //Arco superior pantalla
 Surface salida;
-Surface pared;
+Surface pared, pared1;
 Surface paredFlotanteIzq;
 Surface paredFlotanteDer;
 
@@ -91,18 +91,24 @@ void setup(){
   
   //SuperficieOrgánica
   arco = new Surface(width/2, height/2-95, width/2, 180, 360);
+  arco1 = new Surface(width/2, height/2-95, width/2-30, 280, 360);
   
   //Superficie salida
   ArrayList<Vec2> puntos = new ArrayList <Vec2>();
   puntos.add(new Vec2(496, 403));
   puntos.add(new Vec2(470, 403));
-  puntos.add(new Vec2(470, 260));
+  puntos.add(new Vec2(470, 240));
   salida = new Surface(puntos);
   
-  //ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
-  //puntosP.add(new Vec2(width/2, 0));
-  //puntosP.add(new Vec2(width/2, 72));
-  //pared = new Surface(puntosP);
+  ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
+  puntosP.add(new Vec2(width/2, 0));
+  puntosP.add(new Vec2(width/2-100, 72));
+  pared = new Surface(puntosP);
+  
+  ArrayList<Vec2> puntosP2 = new ArrayList <Vec2>();
+  puntosP2.add(new Vec2(width/2+40, 45));
+  puntosP2.add(new Vec2(width/2+40, 72));
+  pared1 = new Surface(puntosP2);
   
   
   //Paredes Inferiores Flotantes
@@ -168,7 +174,7 @@ void setup(){
   ob7.caracteristicas("obstaculo", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(24,440,10); //Obstaculo de arriba
+  Boundary ob8 = new Boundary(40,440,10); //Obstaculo de arriba
   ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
@@ -232,6 +238,11 @@ void escenarioJuego(){
   escJuego.display();
   
   arco.display();
+  arco1.display();
+  salida.display();
+  pared.display();
+  pared1.display();
+  
   for (Boundary pared : paredes) {  //busca las paredes en el arraylist
     pared.display();
   }
@@ -250,6 +261,14 @@ void escenarioJuego(){
   text("Puntaje: "+puntos, 100, 20);
   motor1.display();
   motor2.display();
+  
+  if (pelotas.size() == 5) {
+    Ball aux = pelotas.get(pelotas.size()-1);
+    if (aux.done()) {
+      println("final");
+      //escenario = 3;
+    }
+  }
 
 }
 

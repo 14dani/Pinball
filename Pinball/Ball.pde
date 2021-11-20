@@ -26,6 +26,17 @@ class Ball{
     box2d.destroyBody(body);
   }
   
+  // Is the particle ready for deletion?
+  boolean done() {
+    // Let's find the screen position of the particle
+    Vec2 pos = box2d.getBodyPixelCoord(body);
+    // Is it off the bottom of the screen?
+    if (pos.y > height-30) {
+      return true;
+    }
+    return false;
+  }
+  
   
   boolean contains(float x, float y){
     Vec2 worldPoint = box2d.coordPixelsToWorld(x,y);
