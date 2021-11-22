@@ -48,6 +48,7 @@ int escenario;
 
 //Puntos
 int puntos = 0;
+int vidas = 5;
 float Punch;
 
 //Variables para disparo
@@ -264,6 +265,7 @@ void escenarioJuego(){
   fill(255);
   textFont(fuenteJoker);
   text(puntos, 30, 70);
+  text(vidas, width-30, 70);
   
   
   
@@ -399,6 +401,7 @@ void keyReleased(){
       Ball pelota = new Ball(width-15, 389, 10); 
       pelota.potenciaDisparo(potencia);
       pelotas.add(pelota);
+      vidas--;
       GrapHook.trigger();
     }
     //Ball nuevaPelota = new Ball(width-15, 389, 10);
