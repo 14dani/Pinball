@@ -58,6 +58,7 @@ boolean disparando;
 //Motor
 Motor motor1, motor2;
 
+PFont fuenteJoker;
 
 void setup(){
   
@@ -201,6 +202,8 @@ void setup(){
   
   motor2 = new Motor(width-150, 530);
   motor2.caracteristicas("obstaculo2", 0);
+  
+  fuenteJoker = createFont("The Joker.otf", 42);
 
 
 }
@@ -258,14 +261,19 @@ void escenarioJuego(){
   
   
   //pelota.display();
-  text("Puntaje: "+puntos, 100, 20);
+  fill(255);
+  textFont(fuenteJoker);
+  text(puntos, 30, 70);
+  
+  
+  
   motor1.display();
   motor2.display();
   
   if (pelotas.size() == 5) {
     Ball aux = pelotas.get(pelotas.size()-1);
     if (aux.done()) {
-      println("final");
+      
       //escenario = 3;
     }
   }
