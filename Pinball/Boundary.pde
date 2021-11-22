@@ -19,6 +19,7 @@ class Boundary {
     w = w_;
     h = h_;
     r = 0;
+    //id = "";
 
     // Define the polygon
     PolygonShape sd = new PolygonShape();
@@ -45,6 +46,14 @@ class Boundary {
     w = 0;
     h = 0;
     r = r_;
+    
+    
+    //if (id.equals("normal")) 
+    //  animacion = new SpriteSheet("bumper/", 31, "png");
+    //else if (id.equals("portal"))
+    //  animacion = new SpriteSheet("puerta/", 31, "png");
+    
+    //animacion.noLoop();
     
     CircleShape cs = new CircleShape();
     cs.m_radius = box2d.scalarPixelsToWorld(r);

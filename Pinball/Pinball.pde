@@ -148,7 +148,7 @@ void setup(){
   obstaculos.add(ob1);
   
   Boundary ob2 = new Boundary(width/2+80,180,20); //Obstaculo de arriba
-  ob2.caracteristicas("obstaculo", 10);
+  ob2.caracteristicas("portal", 10);
   obstaculos.add(ob2);
   
   
@@ -174,7 +174,7 @@ void setup(){
   
   //Espadas
   Boundary ob7 = new Boundary(65,390,10); //Obstaculo de arriba
-  ob7.caracteristicas("obstaculo", 40);
+  ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
   Boundary ob8 = new Boundary(40,440,10); //Obstaculo de arriba
@@ -261,6 +261,10 @@ void escenarioJuego(){
   
   for (Ball plt : pelotas) { //busca los obstaculos en el arraylist
     plt.display();
+    if (plt.getActivarPortal())
+    {
+      plt.portal(width/2+80,180);
+    }
     
   }
   
@@ -311,7 +315,10 @@ void beginContact(Contact cp) {
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
       Punch2.trigger();
-      
+    }
+    else if (tmpOb.getId().equals("portal")){
+      Ball aux = (Ball) o1;
+      aux.teletransportar();
     }
   }
   
@@ -324,7 +331,12 @@ void beginContact(Contact cp) {
       //RisaE.trigger();
       Punch2.trigger(); 
     }
+    else if(tmpOb.getId().equals("portal")){
+      Ball aux = (Ball) o2;
+      aux.teletransportar();
+    }
   }
+  
   
   // if de obstaculo especial = risa joker
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
@@ -346,6 +358,7 @@ void beginContact(Contact cp) {
       RisaE.trigger();
     }
   }
+  
   
   // if de obstaculo especial = risa joker
   if (o1.getClass() == Ball.class && m2.getClass() == Motor.class) {

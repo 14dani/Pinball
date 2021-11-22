@@ -2,6 +2,7 @@ class Ball{
   
   Body body;
   float r;
+  boolean activarPortal;
   
   //constructor
   Ball(float x_, float y_, float r_){
@@ -25,6 +26,23 @@ class Ball{
   void killBody(){
     box2d.destroyBody(body);
   }
+  
+  
+  void teletransportar() {
+    activarPortal = true;
+  }
+  
+  
+  boolean getActivarPortal() {
+    return activarPortal;
+  }
+  
+  
+  void portal(float _x, float _y) {
+    body.setTransform(box2d.coordPixelsToWorld(new Vec2(_x, _y)), 0);
+    activarPortal = false;
+  }
+  
   
   // Is the particle ready for deletion?
   boolean done() {
