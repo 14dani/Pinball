@@ -36,7 +36,7 @@ ArrayList<Ball> pelotas;
 
 
 //Superficies organicas
-Surface arco, arco1; //Arco superior pantalla
+Surface arco, arco1, arcoMedio; //Arcos
 Surface salida;
 Surface pared, pared1;
 Surface paredFlotanteIzq;
@@ -57,7 +57,7 @@ boolean disparando;
 
 
 //Motor
-Motor motor1, motor2;
+Motor motor1, motor2, motor3;
 
 PFont fuenteJoker;
 
@@ -94,6 +94,7 @@ void setup(){
   //SuperficieOrgánica
   arco = new Surface(width/2, height/2-95, width/2, 180, 360);
   arco1 = new Surface(width/2, height/2-95, width/2-30, 280, 360);
+  arcoMedio = new Surface(width/2, height/2-95, 90, 45, 135);
   
   //Superficie salida
   ArrayList<Vec2> puntos = new ArrayList <Vec2>();
@@ -158,17 +159,17 @@ void setup(){
   
   
   //Diamantes
-  Boundary ob4 = new Boundary(420,305,14); //Obstaculo de arriba
-  ob4.caracteristicas("obstaculo", 30);
-  obstaculos.add(ob4);
+  //Boundary ob4 = new Boundary(420,305,14); //Obstaculo de arriba
+  //ob4.caracteristicas("obstaculo", 30);
+  //obstaculos.add(ob4);
   
-  Boundary ob5 = new Boundary(410,370,14); //Obstaculo de arriba
-  ob5.caracteristicas("obstaculo", 30);
-  obstaculos.add(ob5);
+  //Boundary ob5 = new Boundary(410,370,14); //Obstaculo de arriba
+  //ob5.caracteristicas("obstaculo", 30);
+  //obstaculos.add(ob5);
   
-  Boundary ob6 = new Boundary(380,420,14); //Obstaculo de arriba
-  ob6.caracteristicas("obstaculo", 30);
-  obstaculos.add(ob6);
+  //Boundary ob6 = new Boundary(380,420,14); //Obstaculo de arriba
+  //ob6.caracteristicas("obstaculo", 30);
+  //obstaculos.add(ob6);
   
   
   //Espadas
@@ -198,11 +199,14 @@ void setup(){
   
   
   //Motor
-  motor1 = new Motor(150, 330);
+  motor1 = new Motor(425,320);
   motor1.caracteristicas("obstaculo2", 0);
   
-  motor2 = new Motor(width-150, 530);
+  motor2 = new Motor(405,400);
   motor2.caracteristicas("obstaculo2", 0);
+  
+  motor3 = new Motor(385,480);
+  motor3.caracteristicas("obstaculo2", 0);
   
   fuenteJoker = createFont("The Joker.otf", 42);
 
@@ -243,6 +247,7 @@ void escenarioJuego(){
   
   arco.display();
   arco1.display();
+  arcoMedio.display();
   salida.display();
   pared.display();
   pared1.display();
@@ -271,6 +276,7 @@ void escenarioJuego(){
   
   motor1.display();
   motor2.display();
+  motor3.display();
   
   if (pelotas.size() == 5) {
     Ball aux = pelotas.get(pelotas.size()-1);

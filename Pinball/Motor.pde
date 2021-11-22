@@ -11,7 +11,7 @@ class Motor {
   Motor(float x, float y) {
 
     // Initialize positions of two boxes
-    box1 = new Box(x, y-20, 120, 14, false); 
+    box1 = new Box(x, y-20, 28, 28, false); 
     box2 = new Box(x, y-20, 10, 10, true); 
 
     // Define joint as between two bodies
