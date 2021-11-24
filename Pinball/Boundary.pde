@@ -5,9 +5,11 @@ class Boundary {
   float w;
   float h;
   float r;
-  SpriteSheet Ani;
+  
   Body b;
   
+  
+  SpriteSheet ani;
   String id;
   int valor = 0;
   int type;
@@ -53,26 +55,27 @@ class Boundary {
     valor = _valor;
     
     
-    if (id.equals("TRL")) 
-       Ani = new SpriteSheet("TRL_", 13, "png");  
+    //if (id.equals("TRL")) 
+    //   Ani = new SpriteSheet("TRL_", 13, "png");  
        
-    else if(id.equals("TRG"))  
-       Ani = new SpriteSheet("TRG_", 19, "png");
+    //else if(id.equals("TRG"))  
+    //   Ani = new SpriteSheet("TRG_", 19, "png");
       //Trebol portal
       
-    else if(id.equals("HA"))  
-      Ani = new SpriteSheet("HA_", 16, "png");
+    //else if(id.equals("HA"))  
+    //  Ani = new SpriteSheet("HA_", 14, "png");
       //HAHA's
+    if (id.equals("ES2")) 
+       ani = new SpriteSheet("ES2_", 9, "png");
+     else if(id.equals("portal")) 
+      ani = new SpriteSheet("ES1_", 9, "png");
+    //  //Espadas 1
     
-    else if(id.equals("portal")) 
-      Ani = new SpriteSheet("ES1_", 9, "png");
-      //Espadas 1
+    //else if(id.equals("ES2"))  
+    //  Ani = new SpriteSheet("ES2_", 9, "png");
+    //  //Espadas 2
     
-    else if(id.equals("ES2"))  
-      Ani = new SpriteSheet("ES2_", 9, "png");
-      //Espadas 2
-    
-    Ani.noLoop();
+    ani.noLoop();
     
     CircleShape cs = new CircleShape();
     cs.m_radius = box2d.scalarPixelsToWorld(r);
@@ -92,8 +95,7 @@ class Boundary {
   }
   
   void animar() {
-    Ani.play();
-    
+    ani.play();
   }
   
   int getValor(){
@@ -103,15 +105,16 @@ class Boundary {
 
   // Draw the boundary, if it were at an angle we'd have to do something fancier
   void display() {
-    fill(0);
-    stroke(0);
-    if (id == " ") {
+    
+    if (id.isEmpty()) {
+      fill(0);
+      stroke(0);
       rectMode(CENTER);
       rect(x,y,w,h);
     }
     else {
       imageMode(CENTER);
-      Ani.display(x,y);
+      ani.display(x,y);
     }
   }
 

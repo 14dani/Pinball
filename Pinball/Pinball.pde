@@ -56,7 +56,7 @@ long keyDown, keyUp; //Momento en que se presiona la tecla, momento en que se su
 boolean disparando;
 
 // Animaciones
-ArrayList<AniObs> Ani;
+//ArrayList<AniObs> Ani;
 //for the flippers
 Flipper fl;
 Flipper fr;
@@ -96,7 +96,7 @@ void setup(){
   playJ.loop();
   
   //Animaciones
-  Ani = new ArrayList<AniObs>();
+  //Ani = new ArrayList<AniObs>();
   
   //Escenario
   escPortada = new Escenario(loadImage("Foto-portada.png"));
@@ -160,17 +160,17 @@ void setup(){
   obstaculos = new ArrayList<Boundary>();
   
   //Treboles superiores
-  Boundary ob1 = new Boundary(width/2-85,149,30,"TRL", 10); //Obstaculo de arriba
+  Boundary ob1 = new Boundary(width/2-85,149,40,"TRL", 10); //Obstaculo de arriba
   //ob1.caracteristicas("obstaculo", 10);
   obstaculos.add(ob1);
   
-  Boundary ob2 = new Boundary(width/2+61,149,30,"TRL", 10); //Obstaculo de arriba
+  Boundary ob2 = new Boundary(width/2+61,149,40,"TRL", 10); //Obstaculo de arriba
   //ob2.caracteristicas("portal", 10);
   obstaculos.add(ob2);
   
   
   //Corona
-  Boundary ob3 = new Boundary(43,180,8,"C", 50); //Obstaculo de arriba
+  Boundary ob3 = new Boundary(43,180,8,"HA", 50); //Obstaculo de arriba
   //ob3.caracteristicas("obstaculoE", 50);
   obstaculos.add(ob3);
   
@@ -190,17 +190,17 @@ void setup(){
   
   
   //Espadas
-  Boundary ob7 = new Boundary(59,384,25,"portal", 40); //Obstaculo de arriba
+  Boundary ob7 = new Boundary(59,384,27,"portal", 40); //Obstaculo de arriba
   //ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(118,482,25,"ESP2", 40); //Obstaculo de arriba
+  Boundary ob8 = new Boundary(118,482,26,"ES2", 40); //Obstaculo de arriba
   //ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
   
   //Trebol inferior
-  Boundary ob10 = new Boundary(width/2,500, 30,"TRG", 10); //Obstaculo de arriba
+  Boundary ob10 = new Boundary(width/2,500, 44,"TRG", 10); //Obstaculo de arriba
   //ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
@@ -264,6 +264,7 @@ void escenarioJuego(){
   salida.display();
   pared.display();
   pared1.display();
+  
  //display flippers
   fr.display();
   fl.display(); 
@@ -325,10 +326,10 @@ void beginContact(Contact cp) {
   Object o2 = b2.getUserData();
   Object m2 = b3.getUserData();
 
-// if de obstaculos normales
+// if de obstaculos treboles
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
-    if (tmpOb.getId().equals("TRL")){
+    if (tmpOb.getId().equals("ES2")){
       tmpOb.animar();
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
@@ -340,26 +341,73 @@ void beginContact(Contact cp) {
       aux.teletransportar();
       tmpOb.animar();
     }
-     else if (tmpOb.getId().equals("ESP2")){
-      tmpOb.animar();
-    }
+    
   }
-  
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
     Boundary tmpOb = (Boundary) o1;
-    if (tmpOb.getId().equals("obstaculo")){
+    if (tmpOb.getId().equals("ES2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
       //RisaE.trigger();
+      tmpOb.animar();
       Punch2.trigger(); 
     }
     else if(tmpOb.getId().equals("portal")){
       Ball aux = (Ball) o2;
       aux.teletransportar();
+      tmpOb.animar();
       //AniObs(char tipo, PVector _loc);
     }
   }
+  
+  
+  //// if de obstaculos treboles
+  //if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
+  //  Boundary tmpOb = (Boundary) o2;
+  //  if (tmpOb.getId().equals("TRG")){
+  //    tmpOb.animar();
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    Punch2.trigger();
+  //  }
+  //}
+  //if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
+  //  Boundary tmpOb = (Boundary) o1;
+  //  if (tmpOb.getId().equals("TRG")){
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    //RisaE.trigger();
+  //    tmpOb.animar();
+  //    Punch2.trigger(); 
+  //  }
+  //}
+  
+  
+  //// if de obstaculos corona
+  //if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
+  //  Boundary tmpOb = (Boundary) o2;
+  //  if (tmpOb.getId().equals("ES2")){
+  //    tmpOb.animar();
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    Punch2.trigger();
+  //  }
+  //}
+  //if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
+  //  Boundary tmpOb = (Boundary) o1;
+  //  if (tmpOb.getId().equals("ES2")){
+  //    //Ball tmpBall = (Ball) o1; //o1 de tipo ball
+  //    //tmpBall.ganarPuntos(tmpOb.getValor());
+  //    ganarPuntos(tmpOb.getValor());
+  //    //RisaE.trigger();
+  //    tmpOb.animar();
+  //    Punch2.trigger(); 
+  //  }
+  //}
   
   
   // if de obstaculo especial = risa joker
@@ -372,7 +420,6 @@ void beginContact(Contact cp) {
       RisaE.trigger();      
     }
   }
-  
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
     Boundary tmpOb = (Boundary) o1;
     if (tmpOb.getId().equals("HA")){
@@ -384,7 +431,7 @@ void beginContact(Contact cp) {
   }
   
   
-  // if de obstaculo especial = risa joker
+  // if de motores
   if (o1.getClass() == Ball.class && m2.getClass() == Motor.class) {
     Motor tmpOb = (Motor) o2;
     if (tmpOb.getId().equals("obstaculo2")){
@@ -393,7 +440,6 @@ void beginContact(Contact cp) {
       Punch2.trigger();      
     }
   }
-  
   if (m2.getClass() == Motor.class && o2.getClass() == Ball.class) {
     Motor tmpOb = (Motor) o1;
     if (tmpOb.getId().equals("obstaculo2")){
@@ -460,9 +506,7 @@ void keyReleased(){
       vidas--;
       GrapHook.trigger();
     }
-    //Ball nuevaPelota = new Ball(width-15, 389, 10);
-    //nuevaPelota.potenciaDisparo(potencia);
-    //pelotas.add(nuevaPelota);
+    
     disparando = false;
   }
 }
