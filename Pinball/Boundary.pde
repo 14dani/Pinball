@@ -14,6 +14,8 @@ class Boundary {
   
   //Constructor para elementos cuadrados (paredes)
   Boundary(float x_,float y_, float w_, float h_) {
+    
+    
     x = x_;
     y = y_;
     w = w_;

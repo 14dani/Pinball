@@ -3,12 +3,17 @@ class Ball{
   Body body;
   float r;
   boolean activarPortal;
+  PImage img;
   
   //constructor
   Ball(float x_, float y_, float r_){
+    
+    img = loadImage("Pelota.png");
+    
     float x = x_;
     float y = y_;
-    r = r_;
+    r = img.width / 2;
+    
     
     makeBody(new Vec2(x,y),r);
     body.setUserData(this); //nombre de clase apellido Ball
@@ -71,14 +76,14 @@ class Ball{
     //Get its angle of rotations
     float a = body.getAngle();
     
-    ellipseMode(CENTER);
-    noStroke();
-    fill(0);
-    
+    //ellipseMode(CENTER);
+    //noStroke();
+    //fill(150);
+    imageMode(CENTER);
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(a);
-    circle(0,0,r*2);
+    image(img,0,0);
     popMatrix();
     
     

@@ -89,12 +89,13 @@ void setup(){
   
   //Escenario
   escPortada = new Escenario(loadImage("Foto-portada.png"));
-  escJuego = new Escenario(loadImage("Foto-Juego.png"));
+  escJuego = new Escenario(loadImage("Escena 2.png"));
   
   //SuperficieOrgánica
   arco = new Surface(width/2, height/2-95, width/2, 180, 360);
   arco1 = new Surface(width/2, height/2-95, width/2-30, 280, 360);
-  arcoMedio = new Surface(width/2, height/2-95, 90, 45, 135);
+  arcoMedio = new Surface(width/2, height/2+60, 90, 210, 330 );
+
   
   //Superficie salida
   ArrayList<Vec2> puntos = new ArrayList <Vec2>();
@@ -143,17 +144,17 @@ void setup(){
   obstaculos = new ArrayList<Boundary>();
   
   //Treboles superiores
-  Boundary ob1 = new Boundary(width/2-80,180,20); //Obstaculo de arriba
+  Boundary ob1 = new Boundary(width/2-85,149,30); //Obstaculo de arriba
   ob1.caracteristicas("obstaculo", 10);
   obstaculos.add(ob1);
   
-  Boundary ob2 = new Boundary(width/2+80,180,20); //Obstaculo de arriba
+  Boundary ob2 = new Boundary(width/2+61,149,30); //Obstaculo de arriba
   ob2.caracteristicas("portal", 10);
   obstaculos.add(ob2);
   
   
   //Corona
-  Boundary ob3 = new Boundary(24,166,5); //Obstaculo de arriba
+  Boundary ob3 = new Boundary(43,180,10); //Obstaculo de arriba
   ob3.caracteristicas("obstaculoE", 50);
   obstaculos.add(ob3);
   
@@ -173,21 +174,17 @@ void setup(){
   
   
   //Espadas
-  Boundary ob7 = new Boundary(65,390,10); //Obstaculo de arriba
+  Boundary ob7 = new Boundary(59,384,25); //Obstaculo de arriba
   ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(40,440,10); //Obstaculo de arriba
+  Boundary ob8 = new Boundary(118,482,25); //Obstaculo de arriba
   ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
-  Boundary ob9 = new Boundary(90,450,10); //Obstaculo de arriba
-  ob9.caracteristicas("obstaculo", 40);
-  obstaculos.add(ob9);
-  
   
   //Trebol inferior
-  Boundary ob10 = new Boundary(width/2,480, 20); //Obstaculo de arriba
+  Boundary ob10 = new Boundary(width/2,500, 30); //Obstaculo de arriba
   ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
