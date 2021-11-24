@@ -45,7 +45,7 @@ Surface paredFlotanteDer;
 
 
 //Escenario
-int escenario = 1;
+int escenario = 2;
 
 
 long instant1 = millis();
@@ -116,7 +116,7 @@ void setup(){
   
   ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
   puntosP.add(new Vec2(width/2, 0));
-  puntosP.add(new Vec2(195, 72));
+  puntosP.add(new Vec2(180, 72));
   pared = new Surface(puntosP);
   
   ArrayList<Vec2> puntosP2 = new ArrayList <Vec2>();
@@ -153,33 +153,20 @@ void setup(){
   obstaculos = new ArrayList<Boundary>();
   
   //Treboles superiores
-  //Boundary ob1 = new Boundary(width/2-80,180,20); //Obstaculo de arriba
+  Boundary ob1 = new Boundary(width/2-85,149,32, "TRL", 10); //Obstaculo de arriba
   //ob1.caracteristicas("obstaculo", 10);
-  //obstaculos.add(ob1);
+  obstaculos.add(ob1);
   
-  //Boundary ob2 = new Boundary(width/2+80,180,20); //Obstaculo de arriba
+  //Boundary ob2 = new Boundary(width/2+61,149,20); //Obstaculo de arriba
   //ob2.caracteristicas("obstaculo", 10);
   //obstaculos.add(ob2);
   
   
   ////Corona
-  //Boundary ob3 = new Boundary(24,166,5); //Obstaculo de arriba
+  //Boundary ob3 = new Boundary(43,180,5); //Obstaculo de arriba
   //ob3.caracteristicas("obstaculoE", 50);
   //obstaculos.add(ob3);
   
-  
-  //Diamantes
-  //Boundary ob4 = new Boundary(420,305,14); //Obstaculo de arriba
-  //ob4.caracteristicas("obstaculo", 30);
-  //obstaculos.add(ob4);
-  
-  //Boundary ob5 = new Boundary(410,370,14); //Obstaculo de arriba
-  //ob5.caracteristicas("obstaculo", 30);
-  //obstaculos.add(ob5);
-  
-  //Boundary ob6 = new Boundary(380,420,14); //Obstaculo de arriba
-  //ob6.caracteristicas("obstaculo", 30);
-  //obstaculos.add(ob6);
   
   
   //Espadas
@@ -187,7 +174,7 @@ void setup(){
   //ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(118,482,27,"obstaculo",40); //Obstaculo de arriba
+  Boundary ob8 = new Boundary(118,482,27,"ES2",40); //Obstaculo de arriba
   //ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
@@ -197,9 +184,9 @@ void setup(){
   
   
   //Trebol inferior
-  //Boundary ob10 = new Boundary(width/2,480, 20); //Obstaculo de arriba
+  Boundary ob10 = new Boundary(width/2,500, 32, "TRL", 10); //Obstaculo de arriba
   //ob10.caracteristicas("obstaculo", 10);
-  //obstaculos.add(ob10);
+  obstaculos.add(ob10);
   
   
   //Cuerpos dinámicos
@@ -300,7 +287,7 @@ void escenarioJuego(){
     plt.display();
     if (plt.getActivarPortal())
     {
-      plt.portal(width/2+80,180);
+      plt.portal(width/2+61,149);
     }
   }
   
@@ -348,7 +335,7 @@ void beginContact(Contact cp) {
 
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
-    if (tmpOb.getId().equals("obstaculo")){
+    if (tmpOb.getId().equals("ES2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       tmpOb.animar();
@@ -361,11 +348,16 @@ void beginContact(Contact cp) {
       Ball aux = (Ball) o1;
       aux.teletransportar();
     }
+    else if (tmpOb.getId().equals("TRL")){
+      tmpOb.animar();
+      ganarPuntos(tmpOb.getValor());
+      Punch2.trigger();
+    }
   }
   
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
     Boundary tmpOb = (Boundary) o1;
-    if (tmpOb.getId().equals("obstaculo")){
+    if (tmpOb.getId().equals("ES2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       tmpOb.animar();
@@ -378,6 +370,11 @@ void beginContact(Contact cp) {
       Ball aux = (Ball) o2;
       aux.teletransportar();
       //AniObs(char tipo, PVector _loc);
+    }
+    else if (tmpOb.getId().equals("TRL")){
+      tmpOb.animar();
+      ganarPuntos(tmpOb.getValor());
+      Punch2.trigger();
     }
   }
   

@@ -50,10 +50,19 @@ class Boundary {
     valor = _v;
     id = _id;
     
-    if (id.equals("obstaculo")) 
+    //if (id.equals("obstaculo")) 
+    //  animacion = new SpriteSheet("ES2_", 9, "png");
+    //else if (id.equals("portal"))
+    //  animacion = new SpriteSheet("ES1_", 9, "png");
+    //else if (id.equals("TRL"))
+    //  animacion = new SpriteSheet("TRL_", 18, "png");  
+    
+    if (id.equals("ES2")) 
       animacion = new SpriteSheet("ES2_", 9, "png");
     else if (id.equals("portal"))
       animacion = new SpriteSheet("ES1_", 9, "png");
+    else if (id.equals("TRL"))
+      animacion = new SpriteSheet("TRL_", 18, "png"); 
       
     
     animacion.noLoop();
