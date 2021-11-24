@@ -5,11 +5,12 @@ class Boundary {
   float w;
   float h;
   float r;
-  
+  SpriteSheet Ani;
   Body b;
   
   String id = "";
   int valor = 0;
+  int type;
   
   
   //Constructor para elementos cuadrados (paredes)
@@ -21,7 +22,7 @@ class Boundary {
     w = w_;
     h = h_;
     r = 0;
-    //id = "";
+    id = "";
 
     // Define the polygon
     PolygonShape sd = new PolygonShape();
@@ -42,7 +43,7 @@ class Boundary {
   }
   
   //Constructor para elementos circulares (obstaculos)
-  Boundary(float x_,float y_, float r_) {
+  Boundary(float x_,float y_, float r_, int type) {
     x = x_;
     y = y_;
     w = 0;
@@ -50,12 +51,26 @@ class Boundary {
     r = r_;
     
     
-    //if (id.equals("normal")) 
-    //  animacion = new SpriteSheet("bumper/", 31, "png");
-    //else if (id.equals("portal"))
-    //  animacion = new SpriteSheet("puerta/", 31, "png");
+    if (type == 1) 
+       Ani = new SpriteSheet("TRL_", 13, "png");  
+       
+    else if(type == 2)  
+       Ani = new SpriteSheet("TRG_", 19, "png");
+      //Trebol portal
+      
+    else if(type == 3)  
+      Ani = new SpriteSheet("HA_", 16, "png");
+      //HAHA's
     
-    //animacion.noLoop();
+    else if(type == 4) 
+      Ani = new SpriteSheet("ES1_", 9, "png");
+      //Espadas 1
+    
+    else if(type == 5)  
+      Ani = new SpriteSheet("ES2_", 9, "png");
+      //Espadas 2
+    
+    Ani.noLoop();
     
     CircleShape cs = new CircleShape();
     cs.m_radius = box2d.scalarPixelsToWorld(r);
@@ -80,6 +95,10 @@ class Boundary {
     return id;
   }
   
+  void animar() {
+    Ani.play();
+    
+  }
   
   int getValor(){
     return valor;
@@ -95,8 +114,8 @@ class Boundary {
       rect(x,y,w,h);
     }
     else {
-      ellipseMode(CENTER);
-      circle(x,y,r*2);
+      imageMode(CENTER);
+      Ani.display(x,y);
     }
   }
 

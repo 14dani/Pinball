@@ -55,6 +55,15 @@ float Punch;
 long keyDown, keyUp; //Momento en que se presiona la tecla, momento en que se suelta
 boolean disparando;
 
+// Animaciones
+ArrayList<AniObs> Ani;
+//for the flippers
+Flipper fl;
+Flipper fr;
+//turning flippers on/off
+boolean lflip;
+boolean rflip;
+
 
 //Motor
 Motor motor1, motor2, motor3;
@@ -86,11 +95,18 @@ void setup(){
   playJ.play();
   playJ.loop();
   
+  //Animaciones
+  Ani = new ArrayList<AniObs>();
   
   //Escenario
   escPortada = new Escenario(loadImage("Foto-portada.png"));
   escJuego = new Escenario(loadImage("Escena 2.png"));
   
+  // flippers
+  fr = new Flipper(width/2 + 70, height - 120, 25, -QUARTER_PI/2, QUARTER_PI, false, 15, 10, 60);
+  fl = new Flipper(width/2 - 120, height - 120, 25, -QUARTER_PI/2 - radians(15), QUARTER_PI - radians(20), true, 15, 10, 60); //have no idea why they don't match up but this works
+  
+  //ft = new Flipper(10, 500, 25, -QUARTER_PI, HALF_PI - QUARTER_PI, true, 10,5,30);
   //SuperficieOrgánica
   arco = new Surface(width/2, height/2-95, width/2, 180, 360);
   arco1 = new Surface(width/2, height/2-95, width/2-30, 280, 360);
@@ -144,17 +160,17 @@ void setup(){
   obstaculos = new ArrayList<Boundary>();
   
   //Treboles superiores
-  Boundary ob1 = new Boundary(width/2-85,149,30); //Obstaculo de arriba
+  Boundary ob1 = new Boundary(width/2-85,149,30,1); //Obstaculo de arriba
   ob1.caracteristicas("obstaculo", 10);
   obstaculos.add(ob1);
   
-  Boundary ob2 = new Boundary(width/2+61,149,30); //Obstaculo de arriba
+  Boundary ob2 = new Boundary(width/2+61,149,30,1); //Obstaculo de arriba
   ob2.caracteristicas("portal", 10);
   obstaculos.add(ob2);
   
   
   //Corona
-  Boundary ob3 = new Boundary(43,180,10); //Obstaculo de arriba
+  Boundary ob3 = new Boundary(43,180,8,3); //Obstaculo de arriba
   ob3.caracteristicas("obstaculoE", 50);
   obstaculos.add(ob3);
   
@@ -174,17 +190,17 @@ void setup(){
   
   
   //Espadas
-  Boundary ob7 = new Boundary(59,384,25); //Obstaculo de arriba
+  Boundary ob7 = new Boundary(59,384,25,4); //Obstaculo de arriba
   ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(118,482,25); //Obstaculo de arriba
+  Boundary ob8 = new Boundary(118,482,25,4); //Obstaculo de arriba
   ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
   
   //Trebol inferior
-  Boundary ob10 = new Boundary(width/2,500, 30); //Obstaculo de arriba
+  Boundary ob10 = new Boundary(width/2,500, 30,2); //Obstaculo de arriba
   ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
@@ -248,6 +264,11 @@ void escenarioJuego(){
   salida.display();
   pared.display();
   pared1.display();
+ //display flippers
+  fr.display();
+  fl.display(); 
+    rflip = true;
+  lflip = true;
   
   for (Boundary pared : paredes) {  //busca las paredes en el arraylist
     pared.display();
@@ -308,6 +329,7 @@ void beginContact(Contact cp) {
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
     if (tmpOb.getId().equals("obstaculo")){
+      tmpOb.animar();
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
@@ -331,6 +353,7 @@ void beginContact(Contact cp) {
     else if(tmpOb.getId().equals("portal")){
       Ball aux = (Ball) o2;
       aux.teletransportar();
+      //AniObs(char tipo, PVector _loc);
     }
   }
   
@@ -404,7 +427,20 @@ void keyPressed(){
       
     }
   }
-  
+  if(keyCode == RIGHT && rflip)
+  {
+    fr.reverseSpeed();
+    //ff.reverseSpeed();
+    rflip = false;
+   // fflip = false;
+  }
+  if(keyCode == LEFT && lflip)
+  {
+    fl.reverseSpeed();
+    //ft.reverseSpeed();
+    lflip = false;
+    //tflip = false;
+  }
 }
 
 
