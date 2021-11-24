@@ -56,7 +56,7 @@ class Box {
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(-a);
-    fill(#FE8806);
+    fill(0);
     noStroke();
     //strokeWeight(2);
     rect(0,0,w,h);

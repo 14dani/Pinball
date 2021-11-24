@@ -63,6 +63,11 @@ class Boundary {
       animacion = new SpriteSheet("ES1_", 9, "png");
     else if (id.equals("TRL"))
       animacion = new SpriteSheet("TRL_", 18, "png"); 
+    else if (id.equals("TRG"))
+      animacion = new SpriteSheet("TRG_", 25, "png");
+    else if (id.equals("HA")){
+      animacion = new SpriteSheet("HA1_", 9, "png");
+    }
       
     
     animacion.noLoop();
@@ -111,6 +116,8 @@ class Boundary {
       imageMode(CENTER);
       animacion.display(x,y);
     }
+    
+    
   }
 
 }

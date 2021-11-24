@@ -114,10 +114,10 @@ void setup(){
   puntos.add(new Vec2(470, 240));
   salida = new Surface(puntos);
   
-  ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
-  puntosP.add(new Vec2(width/2, 0));
-  puntosP.add(new Vec2(180, 72));
-  pared = new Surface(puntosP);
+  //ArrayList<Vec2> puntosP = new ArrayList <Vec2>();
+  //puntosP.add(new Vec2(width/2, 0));
+  //puntosP.add(new Vec2(180, 72));
+  //pared = new Surface(puntosP);
   
   ArrayList<Vec2> puntosP2 = new ArrayList <Vec2>();
   puntosP2.add(new Vec2(width/2+40, 45));
@@ -157,15 +157,15 @@ void setup(){
   //ob1.caracteristicas("obstaculo", 10);
   obstaculos.add(ob1);
   
-  //Boundary ob2 = new Boundary(width/2+61,149,20); //Obstaculo de arriba
+  Boundary ob2 = new Boundary(width/2+61,149,32,"TRG",10); //Obstaculo de arriba
   //ob2.caracteristicas("obstaculo", 10);
-  //obstaculos.add(ob2);
+  obstaculos.add(ob2);
   
   
   ////Corona
-  //Boundary ob3 = new Boundary(43,180,5); //Obstaculo de arriba
+  Boundary ob3 = new Boundary(43,150,8,"HA", 50); //Obstaculo de arriba
   //ob3.caracteristicas("obstaculoE", 50);
-  //obstaculos.add(ob3);
+  obstaculos.add(ob3);
   
   
   
@@ -273,7 +273,7 @@ void escenarioJuego(){
   arco1.display();
   arcoMedio.display();
   salida.display();
-  pared.display();
+  //pared.display();
   pared1.display();
   
   for (Boundary pared : paredes) {  //busca las paredes en el arraylist
@@ -338,10 +338,9 @@ void beginContact(Contact cp) {
     if (tmpOb.getId().equals("ES2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
-      tmpOb.animar();
       ganarPuntos(tmpOb.getValor());
       Punch2.trigger();
-      
+      tmpOb.animar();
     }
     else if (tmpOb.getId().equals("portal")){
       tmpOb.animar();
@@ -349,9 +348,14 @@ void beginContact(Contact cp) {
       aux.teletransportar();
     }
     else if (tmpOb.getId().equals("TRL")){
-      tmpOb.animar();
       ganarPuntos(tmpOb.getValor());
       Punch2.trigger();
+      tmpOb.animar();
+    }
+    else if (tmpOb.getId().equals("TRG")){
+      ganarPuntos(tmpOb.getValor());
+      Punch2.trigger();
+      tmpOb.animar();
     }
   }
   
@@ -360,10 +364,10 @@ void beginContact(Contact cp) {
     if (tmpOb.getId().equals("ES2")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
-      tmpOb.animar();
       ganarPuntos(tmpOb.getValor());
       //RisaE.trigger();
       Punch2.trigger(); 
+      tmpOb.animar();
     }
     else if(tmpOb.getId().equals("portal")){
       tmpOb.animar();
@@ -372,9 +376,14 @@ void beginContact(Contact cp) {
       //AniObs(char tipo, PVector _loc);
     }
     else if (tmpOb.getId().equals("TRL")){
-      tmpOb.animar();
       ganarPuntos(tmpOb.getValor());
       Punch2.trigger();
+      tmpOb.animar();
+    }
+    else if (tmpOb.getId().equals("TRG")){
+      ganarPuntos(tmpOb.getValor());
+      Punch2.trigger();
+      tmpOb.animar();
     }
   }
   
@@ -382,21 +391,23 @@ void beginContact(Contact cp) {
   
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("HA")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
-      RisaE.trigger();      
+      RisaE.trigger();
+      tmpOb.animar();
     }
   }
   
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
     Boundary tmpOb = (Boundary) o1;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("HA")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
       RisaE.trigger();
+      tmpOb.animar();
     }
   }
   
