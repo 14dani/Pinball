@@ -51,7 +51,7 @@ class Boundary {
     w = 0;
     h = 0;
     r = r_;
-    id = _id;
+    id = "TRL";
     valor = _valor;
     
     
