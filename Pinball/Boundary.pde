@@ -8,7 +8,7 @@ class Boundary {
   SpriteSheet Ani;
   Body b;
   
-  String id = "";
+  String id;
   int valor = 0;
   int type;
   
@@ -43,30 +43,32 @@ class Boundary {
   }
   
   //Constructor para elementos circulares (obstaculos)
-  Boundary(float x_,float y_, float r_, int type) {
+  Boundary(float x_,float y_, float r_, String _id, int _valor) {
     x = x_;
     y = y_;
     w = 0;
     h = 0;
     r = r_;
+    id = _id;
+    valor = _valor;
     
     
-    if (type == 1) 
+    if (id.equals("TRL")) 
        Ani = new SpriteSheet("TRL_", 13, "png");  
        
-    else if(type == 2)  
+    else if(id.equals("TRG"))  
        Ani = new SpriteSheet("TRG_", 19, "png");
       //Trebol portal
       
-    else if(type == 3)  
+    else if(id.equals("HA"))  
       Ani = new SpriteSheet("HA_", 16, "png");
       //HAHA's
     
-    else if(type == 4) 
+    else if(id.equals("portal")) 
       Ani = new SpriteSheet("ES1_", 9, "png");
       //Espadas 1
     
-    else if(type == 5)  
+    else if(id.equals("ES2"))  
       Ani = new SpriteSheet("ES2_", 9, "png");
       //Espadas 2
     
@@ -82,12 +84,6 @@ class Boundary {
     
     b.createFixture(cs,1);
     b.setUserData(this);
-  }
-  
-  
-  void caracteristicas(String _id, int _valor){
-    id = _id;
-    valor = _valor;
   }
   
   
@@ -109,7 +105,7 @@ class Boundary {
   void display() {
     fill(0);
     stroke(0);
-    if (r == 0) {
+    if (id == " ") {
       rectMode(CENTER);
       rect(x,y,w,h);
     }

@@ -160,18 +160,18 @@ void setup(){
   obstaculos = new ArrayList<Boundary>();
   
   //Treboles superiores
-  Boundary ob1 = new Boundary(width/2-85,149,30,1); //Obstaculo de arriba
-  ob1.caracteristicas("obstaculo", 10);
+  Boundary ob1 = new Boundary(width/2-85,149,30,"TRL", 10); //Obstaculo de arriba
+  //ob1.caracteristicas("obstaculo", 10);
   obstaculos.add(ob1);
   
-  Boundary ob2 = new Boundary(width/2+61,149,30,1); //Obstaculo de arriba
-  ob2.caracteristicas("portal", 10);
+  Boundary ob2 = new Boundary(width/2+61,149,30,"TRL", 10); //Obstaculo de arriba
+  //ob2.caracteristicas("portal", 10);
   obstaculos.add(ob2);
   
   
   //Corona
-  Boundary ob3 = new Boundary(43,180,8,3); //Obstaculo de arriba
-  ob3.caracteristicas("obstaculoE", 50);
+  Boundary ob3 = new Boundary(43,180,8,"C", 50); //Obstaculo de arriba
+  //ob3.caracteristicas("obstaculoE", 50);
   obstaculos.add(ob3);
   
   
@@ -190,18 +190,18 @@ void setup(){
   
   
   //Espadas
-  Boundary ob7 = new Boundary(59,384,25,4); //Obstaculo de arriba
-  ob7.caracteristicas("portal", 40);
+  Boundary ob7 = new Boundary(59,384,25,"portal", 40); //Obstaculo de arriba
+  //ob7.caracteristicas("portal", 40);
   obstaculos.add(ob7);
   
-  Boundary ob8 = new Boundary(118,482,25,4); //Obstaculo de arriba
-  ob8.caracteristicas("obstaculo", 40);
+  Boundary ob8 = new Boundary(118,482,25,"ESP2", 40); //Obstaculo de arriba
+  //ob8.caracteristicas("obstaculo", 40);
   obstaculos.add(ob8);
   
   
   //Trebol inferior
-  Boundary ob10 = new Boundary(width/2,500, 30,2); //Obstaculo de arriba
-  ob10.caracteristicas("obstaculo", 10);
+  Boundary ob10 = new Boundary(width/2,500, 30,"TRG", 10); //Obstaculo de arriba
+  //ob10.caracteristicas("obstaculo", 10);
   obstaculos.add(ob10);
   
   
@@ -328,7 +328,7 @@ void beginContact(Contact cp) {
 // if de obstaculos normales
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
-    if (tmpOb.getId().equals("obstaculo")){
+    if (tmpOb.getId().equals("TRL")){
       tmpOb.animar();
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
@@ -338,6 +338,10 @@ void beginContact(Contact cp) {
     else if (tmpOb.getId().equals("portal")){
       Ball aux = (Ball) o1;
       aux.teletransportar();
+      tmpOb.animar();
+    }
+     else if (tmpOb.getId().equals("ESP2")){
+      tmpOb.animar();
     }
   }
   
@@ -361,7 +365,7 @@ void beginContact(Contact cp) {
   // if de obstaculo especial = risa joker
   if (o1.getClass() == Ball.class && o2.getClass() == Boundary.class) {
     Boundary tmpOb = (Boundary) o2;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("HA")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
@@ -371,7 +375,7 @@ void beginContact(Contact cp) {
   
   if (o1.getClass() == Boundary.class && o2.getClass() == Ball.class) {
     Boundary tmpOb = (Boundary) o1;
-    if (tmpOb.getId().equals("obstaculoE")){
+    if (tmpOb.getId().equals("HA")){
       //Ball tmpBall = (Ball) o1; //o1 de tipo ball
       //tmpBall.ganarPuntos(tmpOb.getValor());
       ganarPuntos(tmpOb.getValor());
